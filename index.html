@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ebere Okafor — Digital Educator & Coach</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --card: #16161f;
+    --border: #252535;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --text: #e8e8f0;
+    --muted: #7a7a9a;
+    --white: #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.4rem 6vw;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 600; letter-spacing: .08em;
+    color: var(--gold);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--muted);
+    font-size: .82rem; letter-spacing: .12em; text-transform: uppercase;
+    transition: color .3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ─── HERO ────────────────────────────── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 0 6vw;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 75% 40%, rgba(201,168,76,.08) 0%, transparent 65%),
+      radial-gradient(ellipse 40% 50% at 20% 80%, rgba(201,168,76,.04) 0%, transparent 60%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; opacity: .035;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-content { position: relative; max-width: 700px; }
+  .hero-tag {
+    display: inline-block;
+    font-size: .72rem; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--gold); border: 1px solid rgba(201,168,76,.35);
+    padding: .4rem 1rem; border-radius: 2px; margin-bottom: 2rem;
+    animation: fadeUp .8s ease both;
+  }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.2rem, 7vw, 6rem);
+    font-weight: 700; line-height: 1.0;
+    color: var(--white);
+    animation: fadeUp .8s .15s ease both;
+  }
+  .hero-name span { color: var(--gold); }
+  .hero-sub {
+    margin-top: 1.6rem; font-size: 1.05rem; line-height: 1.8;
+    color: var(--muted); max-width: 520px;
+    animation: fadeUp .8s .3s ease both;
+  }
+  .hero-cta {
+    margin-top: 2.6rem; display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp .8s .45s ease both;
+  }
+  .btn-primary {
+    background: var(--gold); color: #0a0a0f;
+    padding: .85rem 2rem; border-radius: 3px;
+    font-size: .85rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
+    text-decoration: none; transition: background .3s, transform .2s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-outline {
+    border: 1px solid var(--border); color: var(--text);
+    padding: .85rem 2rem; border-radius: 3px;
+    font-size: .85rem; font-weight: 400; letter-spacing: .08em; text-transform: uppercase;
+    text-decoration: none; transition: border-color .3s, color .3s;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-stats {
+    position: absolute; right: 6vw; bottom: 8vh;
+    display: flex; gap: 3rem;
+    animation: fadeUp .8s .6s ease both;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem; font-weight: 600; color: var(--gold); line-height: 1;
+  }
+  .stat-label { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: .3rem; }
+
+  /* ─── SECTIONS ────────────────────────── */
+  section { padding: 7rem 6vw; }
+  .section-label {
+    font-size: .72rem; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 600;
+    color: var(--white); line-height: 1.15; margin-bottom: 1.2rem;
+  }
+  .section-divider {
+    width: 48px; height: 2px; background: var(--gold);
+    margin-bottom: 2.4rem;
+  }
+  .section-body { color: var(--muted); line-height: 1.85; max-width: 580px; }
+
+  /* ─── ABOUT ───────────────────────────── */
+  #about { background: var(--surface); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .about-image-wrap {
+    position: relative;
+    aspect-ratio: 4/5; max-width: 420px;
+  }
+  .about-image-placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, var(--card) 0%, #1e1e2e 100%);
+    border: 1px solid var(--border);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: .8rem; color: var(--muted); font-size: .8rem; letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  .about-image-placeholder svg { opacity: .3; }
+  .about-accent {
+    position: absolute; bottom: -16px; right: -16px;
+    width: 70%; height: 70%;
+    border: 1px solid rgba(201,168,76,.2);
+    z-index: -1;
+  }
+  .about-corner {
+    position: absolute; top: -12px; left: -12px;
+    width: 40px; height: 40px;
+    border-top: 2px solid var(--gold);
+    border-left: 2px solid var(--gold);
+  }
+  .about-text p + p { margin-top: 1rem; }
+  .about-highlights { margin-top: 2rem; display: flex; flex-direction: column; gap: .9rem; }
+  .highlight-item {
+    display: flex; align-items: center; gap: 1rem;
+    font-size: .88rem; color: var(--muted);
+  }
+  .highlight-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+
+  /* ─── SERVICES ────────────────────────── */
+  #services { background: var(--bg); }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 3.5rem; }
+  .service-card {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 2.4rem 2rem; border-radius: 4px;
+    transition: border-color .3s, transform .3s;
+    position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    opacity: 0; transition: opacity .3s;
+  }
+  .service-card:hover { border-color: rgba(201,168,76,.4); transform: translateY(-4px); }
+  .service-card:hover::before { opacity: 1; }
+  .service-icon {
+    width: 44px; height: 44px;
+    border: 1px solid var(--border); border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.4rem; color: var(--gold);
+  }
+  .service-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem; font-weight: 600; color: var(--white);
+    margin-bottom: .8rem;
+  }
+  .service-desc { font-size: .87rem; color: var(--muted); line-height: 1.8; }
+
+  /* ─── WORK SAMPLES ────────────────────── */
+  #work { background: var(--surface); }
+  .work-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 3.5rem; }
+  .work-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 4px; overflow: hidden;
+    transition: transform .3s, border-color .3s;
+  }
+  .work-card:hover { transform: translateY(-5px); border-color: rgba(201,168,76,.35); }
+  .work-thumb {
+    height: 190px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem;
+    position: relative; overflow: hidden;
+  }
+  .work-thumb-1 { background: linear-gradient(135deg, #1a1a2e, #16213e); }
+  .work-thumb-2 { background: linear-gradient(135deg, #1a2e1a, #162e21); }
+  .work-thumb-3 { background: linear-gradient(135deg, #2e1a1a, #2e2116); }
+  .work-info { padding: 1.6rem; }
+  .work-tag {
+    display: inline-block; font-size: .68rem; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--gold);
+    border: 1px solid rgba(201,168,76,.3); padding: .25rem .7rem;
+    border-radius: 2px; margin-bottom: .9rem;
+  }
+  .work-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-weight: 600; color: var(--white);
+    margin-bottom: .5rem;
+  }
+  .work-desc { font-size: .83rem; color: var(--muted); line-height: 1.75; }
+
+  /* ─── TESTIMONIALS ────────────────────── */
+  #testimonials { background: var(--bg); }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3.5rem; }
+  .testimonial-card {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 2.2rem; border-radius: 4px;
+    position: relative;
+  }
+  .quote-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem; line-height: .6;
+    color: var(--gold); opacity: .25;
+    position: absolute; top: 1.2rem; right: 1.8rem;
+  }
+  .testimonial-text {
+    font-size: .92rem; line-height: 1.85;
+    color: var(--muted); margin-bottom: 1.6rem; font-style: italic;
+  }
+  .testimonial-author { display: flex; align-items: center; gap: 1rem; }
+  .author-avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold) 0%, #8b6914 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 600; color: #0a0a0f; flex-shrink: 0;
+  }
+  .author-name { font-size: .88rem; color: var(--white); font-weight: 500; }
+  .author-role { font-size: .75rem; color: var(--muted); }
+  .stars { color: var(--gold); font-size: .75rem; margin-bottom: 1rem; letter-spacing: 2px; }
+
+  /* ─── CTA BANNER ──────────────────────── */
+  #cta {
+    background: linear-gradient(135deg, #111118 0%, #1a1a10 100%);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    text-align: center; padding: 6rem 6vw;
+  }
+  #cta .section-title { margin: 0 auto 1rem; max-width: 600px; }
+  #cta .section-body { margin: 0 auto 2.5rem; text-align: center; }
+  #cta .section-divider { margin: 0 auto 2rem; }
+
+  /* ─── FOOTER ──────────────────────────── */
+  footer {
+    background: var(--surface); border-top: 1px solid var(--border);
+    padding: 2.5rem 6vw;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-weight: 600; color: var(--gold);
+  }
+  .footer-copy { font-size: .78rem; color: var(--muted); }
+
+  /* ─── ANIMATIONS ──────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── RESPONSIVE ──────────────────────── */
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 5vw; }
+    .nav-links { display: none; }
+    .hero-stats { position: static; margin-top: 3rem; justify-content: flex-start; }
+    #hero { padding-top: 6rem; flex-direction: column; justify-content: center; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .about-image-wrap { max-width: 100%; aspect-ratio: 4/3; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Ebere Okafor</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Digital Educator &amp; Career Coach</div>
+    <h1 class="hero-name">Ebere<br/><span>Okafor</span></h1>
+    <p class="hero-sub">
+      Empowering African writers and professionals to build profitable digital careers — through education, community, and proven systems.
+    </p>
+    <div class="hero-cta">
+      <a href="#services" class="btn-primary">Work With Me</a>
+      <a href="#work" class="btn-outline">See My Work</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">500+</div>
+      <div class="stat-label">Students</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3+</div>
+      <div class="stat-label">Years Teaching</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">10+</div>
+      <div class="stat-label">Courses & Resources</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-image-wrap reveal">
+      <div class="about-image-placeholder">
+        <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+          <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+        </svg>
+        <span>Your Photo Here</span>
+      </div>
+      <div class="about-accent"></div>
+      <div class="about-corner"></div>
+    </div>
+    <div class="about-text reveal">
+      <p class="section-label">About Me</p>
+      <h2 class="section-title">Turning Knowledge Into Opportunities</h2>
+      <div class="section-divider"></div>
+      <p class="section-body">
+        I'm Ebere Okafor — a digital educator, content writing coach, and SEO specialist with a passion for helping African writers and aspiring professionals unlock remote income opportunities.
+      </p>
+      <p class="section-body" style="margin-top:1rem;">
+        Through storytelling, practical frameworks, and community-driven teaching, I have helped hundreds of students build strong writing portfolios, land remote clients, and create careers they are proud of.
+      </p>
+      <div class="about-highlights">
+        <div class="highlight-item"><span class="highlight-dot"></span>Content Writing & SEO Strategy</div>
+        <div class="highlight-item"><span class="highlight-dot"></span>Copywriting & Digital Marketing</div>
+        <div class="highlight-item"><span class="highlight-dot"></span>Online Course Creation & Coaching</div>
+        <div class="highlight-item"><span class="highlight-dot"></span>Career Development for Writers</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <p class="section-label reveal">What I Offer</p>
+  <h2 class="section-title reveal">Services &amp; Skills</h2>
+  <div class="section-divider reveal"></div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path d="M12 20h9M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+        </svg>
+      </div>
+      <div class="service-title">Content Writing Coaching</div>
+      <p class="service-desc">One-on-one and group coaching programmes that teach writers how to produce high-converting content and build a sustainable writing career online.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+      </div>
+      <div class="service-title">SEO Strategy</div>
+      <p class="service-desc">Keyword research, on-page SEO, and content strategy designed to help businesses and creators rank higher and attract consistent organic traffic.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/>
+        </svg>
+      </div>
+      <div class="service-title">Copywriting Masterclass</div>
+      <p class="service-desc">A comprehensive e-book and course covering PAS, AIDA, and 4 U's frameworks — designed to turn beginners into confident, paid copywriters.</p>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+        </svg>
+      </div>
+      <div class="service-title">Portfolio &amp; CV Building</div>
+      <p class="service-desc">Guided sessions that help writers craft standout portfolios and CVs that attract remote writing opportunities from clients around the world.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WORK SAMPLES -->
+<section id="work">
+  <p class="section-label reveal">My Work</p>
+  <h2 class="section-title reveal">Work Samples</h2>
+  <div class="section-divider reveal"></div>
+  <div class="work-grid">
+    <div class="work-card reveal">
+      <div class="work-thumb work-thumb-1">📖</div>
+      <div class="work-info">
+        <span class="work-tag">E-Book</span>
+        <div class="work-title">Copywriting Masterclass 101</div>
+        <p class="work-desc">A 17-chapter guide covering persuasion frameworks, real-world exercises, and step-by-step templates for beginner and intermediate copywriters.</p>
+      </div>
+    </div>
+    <div class="work-card reveal">
+      <div class="work-thumb work-thumb-2">✍️</div>
+      <div class="work-info">
+        <span class="work-tag">Content Strategy</span>
+        <div class="work-title">Facebook Growth Blueprint</div>
+        <p class="work-desc">A viral content strategy framework for educators and coaches — combining storytelling, niche clarity, and optimal posting schedules for organic growth.</p>
+      </div>
+    </div>
+    <div class="work-card reveal">
+      <div class="work-thumb work-thumb-3">🎓</div>
+      <div class="work-info">
+        <span class="work-tag">Coaching Programme</span>
+        <div class="work-title">From Zero to Remote Writer</div>
+        <p class="work-desc">A structured programme guiding African writers from skill-building to landing their first paid writing clients — with portfolio, outreach, and pitch templates included.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <p class="section-label reveal">Social Proof</p>
+  <h2 class="section-title reveal">Student Testimonials</h2>
+  <div class="section-divider reveal"></div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card reveal">
+      <div class="quote-mark">"</div>
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">Ebere's coaching completely changed my perspective on writing as a career. Within 3 months of her programme, I landed my first international client and tripled my income.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">A</div>
+        <div>
+          <div class="author-name">Adaeze Nwosu</div>
+          <div class="author-role">Freelance Writer — Lagos, Nigeria</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="quote-mark">"</div>
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">The Copywriting Masterclass is the most practical resource I have come across. The frameworks are easy to apply and I immediately started using them with real clients.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">K</div>
+        <div>
+          <div class="author-name">Kemi Adeleke</div>
+          <div class="author-role">Digital Marketer — Abuja, Nigeria</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal">
+      <div class="quote-mark">"</div>
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">I was stuck for years thinking writing could not pay well in Africa. Ebere showed me a completely different world. I now write for UK and US brands remotely.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">T</div>
+        <div>
+          <div class="author-name">Thabo Molefe</div>
+          <div class="author-role">Content Writer — Johannesburg, SA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <p class="section-label reveal">Ready to Start?</p>
+  <h2 class="section-title reveal">Let's Build Your Writing Career Together</h2>
+  <div class="section-divider reveal"></div>
+  <p class="section-body reveal">Whether you're just starting out or ready to scale, I have the tools, coaching, and resources to get you there. Let's connect.</p>
+  <div style="margin-top:2.5rem;" class="reveal">
+    <a href="mailto:hello@ebereokafor.com" class="btn-primary">Get In Touch</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Ebere Okafor</div>
+  <div class="footer-copy">© 2025 Ebere Okafor. Digital Educator &amp; Writing Coach.</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
